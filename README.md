@@ -1,1 +1,1 @@
-# Hispanic StyleGAN2-ada_project
+# Creating Various Images using StyleGAN2-ada
