@@ -25,6 +25,11 @@
 * 2번째 여성이미지(55장 학습 진행)
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144360626-04d71ea4-6110-465e-898c-82bb6e85b8d2.png"></p>
 
+# Metrics and score
+- FID(Frechet Inception Distance)
+- PPL(Pereceptual Path Length)
+**StyleGAN에선 추가적으로 PPL을 제안하지만 프로젝트의 주 목적은 score보다 데이터셋을 통해서 유의미한 이미지를 육안으로 확인**
+
 # Getting started
 ```python
 #!git clone https://github.com/dvschultz/stylegan2-ada (= StyleGAN2-ada)
@@ -77,12 +82,13 @@ augpipe_specs = {
 ```python
 !pip install opensimplex
 '''Seed must be between 0 and 2**32 - 1'''
+network = '/content/drive/MyDrive/AIB_04_Stylebot/network-snapshot-000200.pkl'
 !python generate.py generate-images --outdir='/content/image' --trunc=0 --seeds=0-555 --network={network} 
 
 ```
 ### 6. Style-mixing을 사용하여 특정 image 특징을 가져와 합성
 ```python
-!python style_mixing.py --outdir='/content/drive/MyDrive/AIB_04_Stylebot/colab-sg2-ada/style_mixing/style=0-3 1024' --trunc=0.5 --rows=4585 --cols=3333,1548,5184,6954,4878  --network='/content/drive/MyDrive/AIB_04_Stylebot/network-snapshot-000100.pkl' --styles=0-3" 
+!python style_mixing.py --outdir='/content/drive/MyDrive/AIB_04_Stylebot/colab-sg2-ada/style_mixing/style=0-3 1024' --trunc=0.5 --rows=4585 --cols=3333,1548,5184,6954,4878  --network={network} --styles=0-3" 
 ```
 
 # Image Generate(1024*1024)
@@ -92,7 +98,9 @@ augpipe_specs = {
 ### * 데이터셋의 가장 평균적인 image(Truncation = 0)
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144366291-a7a61bd6-5ff7-48fd-8a0c-ef4eaf032b8e.png" width="50%" height="50%"/></p>
 
-## style Mixing(column => 0-3 layer의 특징 + low)
+### * Interpolation
+
+### style Mixing(column => 0-3 layer의 특징 + low)
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144366538-9c5e36bb-cb5f-42e6-aaef-4583ec0952bf.png"></p>
 
 # Tools
@@ -106,3 +114,19 @@ augpipe_specs = {
 * glob
 * matplotlib
 * opensimplex
+
+# Results
+1. StyleGAN2-ada는 적은 데이터로도 Augmentation을 통해서 모델 학습
+2. Truncation을 사용하여 유의미한 데이터만 생성
+3. Style-mixing 기능을 사용하여 원하는 data에 특징을 부여하여 새로운 data 생성
+4. 데이터에 대한 저작권을 피할 수 있을 것
+5. 데이터를 확보하는 데 소비되는 비용과 시간을 절약
+
+# Reviews
+1. 학습이 너무 오래걸린다. -> 이미 충분히 학습을 했던 모델이기에 성능은 나쁘지 않았다.(그만큼 시간소요)
+2. Generate Image가 데이터셋 image와의 유사성이 보임. -> 너무 적은데이터로 Augmentation을 진행했기 때문에?
+3. Generate 된 Image는 과연 저작권이 없을 수 있다 볼 수 있는가? -> StyleGAN2에선 Inversion을 제안(이해X)
+4. styleGAN 구조에서 8개의 FC는 어떻게 데이터의 상관관계를 줄여주는가?
+
+**결과적으로 GAN의 목적과 방향성을 공부한 것은 도움이 되었지만 오픈소스인 StyleGAN2-ada의 구현 방법에 대해 정확히 다 이해하기에는 한계**
+**보다 간단한 구조부터 구현해보며 이해하기**
