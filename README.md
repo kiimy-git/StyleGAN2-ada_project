@@ -128,8 +128,6 @@ network = '/content/drive/MyDrive/AIB_04_Stylebot/network-snapshot-000200.pkl'
 3. Generate 된 Image는 과연 저작권이 없을 수 있다 볼 수 있는가? -> StyleGAN2에선 Inversion을 제안(이해X)
 4. styleGAN 구조에서 8개의 FC는 어떻게 데이터의 상관관계를 줄여주는가?
 
-**결과적으로 GAN의 목적과 방향성을 공부한 것은 도움이 되었지만 오픈소스인 StyleGAN2-ada의**
-
-**구현 방법에 대해 정확히 다 이해하기에는 한계**
+=결과적으로 GAN의 목적과 방향성을 공부한 것은 도움이 되었지만 오픈소스인 StyleGAN2-ada의 구현 방법에 대해 정확히 다 이해하기에는 한계
 
 **간단한 구조부터 구현해보며 이해하기**
