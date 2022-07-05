@@ -52,11 +52,11 @@
 #!git clone https://github.com/dvschultz/stylegan2-ada (= StyleGAN2-ada)
 
 import os
-if os.path.isdir("/content/drive/MyDrive/AIB_04_Stylebot/colab-sg2-ada"):
-    %cd "/content/drive/MyDrive/AIB_04_Stylebot/colab-sg2-ada/stylegan2-ada"
+if os.path.isdir(f"/content/drive/MyDrive/{folder}/colab-sg2-ada"):
+    %cd f"/content/drive/MyDrive/{folder}/colab-sg2-ada/stylegan2-ada"
 else:
     #install script
-    %cd "/content/drive/MyDrive/AIB_04_Stylebot"
+    %cd f"/content/drive/MyDrive/{folder}"
     !mkdir colab-sg2-ada
     %cd colab-sg2-ada
     !git clone https://github.com/dvschultz/stylegan2-ada
