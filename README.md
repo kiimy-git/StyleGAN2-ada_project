@@ -1,34 +1,51 @@
 # Creating Various Images using StyleGAN2-ada(Hispanic)
 ### **Team Project**
-### 데이터의 특징들을 학습하여 세상에 존재할법한 이미지를 생성
+### 목표
+* GAN부터 styleGAN2-ada까지 모델의 목적과 방향성을 학습
+* StyleGAN2-ada을 활용하여 세상에 존재할법한 이미지를 생성
+
 [nvidia styleGAN2-ada](https://github.com/NVlabs/stylegan2-ada)
 
+### 문제인식
 * 수 많은 데이터가 존재하지만 정말 유의미한 데이터 확보 어려움
+
+### Benefit
 * GAN은 real data의 학습분포를 학습하며 유의미한 data를 생성해낸다는 부분에서 매우 매력적인 기술
-
-**GAN을 활용하여 유의미한 데이터를 확보하는데 수월해지고 이 데이터들을 가지고 AI모델 성능 향상에 도움**
-
-**(데이터를 확보하는 데 소비되는 비용과 시간을 절약)**
+* **GAN을 활용하여 유의미한 데이터를 확보하는데 수월해지고 이 데이터들을 가지고 AI모델 성능 향상에 도움**
+* **데이터를 확보하는 데 소비되는 비용과 시간을 절약**
 
 # Requirements
-[clone dvschultz styleGAN2-ada](https://github.com/dvschultz/stylegan2-ada)
+[clone styleGAN2-ada](https://github.com/dvschultz/stylegan2-ada)
+
+**SOTA모델을 사용해보는 경험도 중요하지만 먼저 GAN이 어떤 과정으로 학습이 되는지 먼저 알아야할 필요가 있다**
 
 [PPT - GAN은 무엇인가? styleGAN2-ada란?](https://github.com/kimmy-git/StyleGAN2-ada_project/blob/main/AI_04_%EA%B9%80%EC%98%81%ED%9B%88_styleGAN2-ada(ppt).pptx)
 
-**SOTA모델을 사용해보는 경험도 중요하지만 GAN이 어떤 과정으로 학습이 되는지 먼저 알아야할 필요가 있다**
 
-**참조) GAN부터 styleGAN2-ada까지 모델의 목적과 방향성을 학습하는데 중점을 둔 프로젝트**
+# Tools
+* numpy
+* OpenCV
+* Tensorflow 1.x
+* os
+* PIL
+* tqdm
+* pathlib
+* glob
+* matplotlib
+* opensimplex
 
-# Data
-* Pinterest, Google, SNS..등 Hispanic 여성의 이미지 수집(유명인사 위주로)
-* Hispanic 여성마다 특징을 분류
-* 2번째 여성이미지(55장 학습 진행)
-<p align="center"><img src="https://user-images.githubusercontent.com/83389640/144360626-04d71ea4-6110-465e-898c-82bb6e85b8d2.png"></p>
-
-# Metrics and score
-- FID(Frechet Inception Distance)
-- PPL(Pereceptual Path Length)
-**StyleGAN에선 추가적으로 PPL을 제안하지만 프로젝트의 주 목적은 score보다 데이터셋을 통해서 유의미한 이미지를 육안으로 확인**
+# Process
+- [Getting started](#getting-started)
+- [Data](#data)
+- [Metrics and score](#metrics-and-score)
+- [Train Process](#train-process)
+- [Image Generate](#image-generate)
+  * [Grid](#grid)
+  * [Average image](#average-image)
+  * [Interpolation](#interpolation)
+  * [style Mixing](#style-mixing)
+- [Results](#results)
+- [Reviews](#reviews)
 
 # Getting started
 ```python
@@ -47,6 +64,18 @@ else:
     !mkdir downloads
     !mkdir datasets
 ```
+
+# Data
+* Pinterest, Google, SNS..등 Hispanic 여성의 이미지 수집(유명인사 위주로)
+* Hispanic 여성마다 특징을 분류
+* 2번째 여성이미지(55장 학습 진행)
+<p align="center"><img src="https://user-images.githubusercontent.com/83389640/144360626-04d71ea4-6110-465e-898c-82bb6e85b8d2.png"></p>
+
+# Metrics and score
+- FID(Frechet Inception Distance)
+- PPL(Pereceptual Path Length)
+
+**StyleGAN에선 추가적으로 PPL을 제안하지만 프로젝트의 주 목적은 score보다 데이터셋을 통해서 유의미한 이미지 생성 후 육안으로 확인**
 
 # Train Process 
 [.ipynb 참고](https://github.com/kimmy-git/StyleGAN2-ada_project/blob/main/AI_04_%EA%B9%80%EC%98%81%ED%9B%88_styleGAN2-ada.ipynb)
@@ -91,29 +120,22 @@ network = '/content/drive/MyDrive/AIB_04_Stylebot/network-snapshot-000200.pkl'
 !python style_mixing.py --outdir='/content/drive/MyDrive/AIB_04_Stylebot/colab-sg2-ada/style_mixing/style=0-3 1024' --trunc=0.5 --rows=4585 --cols=3333,1548,5184,6954,4878  --network={network} --styles=0-3" 
 ```
 
-# Image Generate(1024*1024)
-### * Grid (Truncation = 0.5)
+# Image Generate
+### (1024*1024) Image
+## Grid
+* Truncation = 0.5
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144365774-a8d851c4-74d3-4ff4-af68-1b0dd3974a95.gif"></p>
 
-### * 데이터셋의 가장 평균적인 image(Truncation = 0)
+## Average image
+* Truncation = 0
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144366291-a7a61bd6-5ff7-48fd-8a0c-ef4eaf032b8e.png" width="50%" height="50%"/></p>
 
-### * Interpolation
+## Interpolation
+https://user-images.githubusercontent.com/83389640/177293268-c2fe90d7-08eb-4056-9a16-c29105461c85.mp4
 
-### style Mixing(column => 0-3 layer의 특징 + low)
+## style Mixing
+* column => 0-3 layer의 특징 + low
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144366538-9c5e36bb-cb5f-42e6-aaef-4583ec0952bf.png"></p>
-
-# Tools
-* numpy
-* OpenCV
-* Tensorflow 1.x
-* os
-* PIL
-* tqdm
-* pathlib
-* glob
-* matplotlib
-* opensimplex
 
 # Results
 1. StyleGAN2-ada는 적은 데이터로도 Augmentation을 통해서 모델 학습
@@ -131,3 +153,4 @@ network = '/content/drive/MyDrive/AIB_04_Stylebot/network-snapshot-000200.pkl'
 **결과적으로 GAN의 목적과 방향성을 공부한 것은 도움이 되었지만 구현 방법에 대해 정확히 다 이해하기에는 한계**
 
 **간단한 구조부터 구현해보며 이해하기**
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
