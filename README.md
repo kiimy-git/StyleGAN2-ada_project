@@ -153,4 +153,3 @@ https://user-images.githubusercontent.com/83389640/177293268-c2fe90d7-08eb-4056-
 **결과적으로 GAN의 목적과 방향성을 공부한 것은 도움이 되었지만 구현 방법에 대해 정확히 다 이해하기에는 한계**
 
 **간단한 구조부터 구현해보며 이해하기**
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
