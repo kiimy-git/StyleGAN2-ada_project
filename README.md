@@ -1,5 +1,5 @@
 # Creating Various Images using StyleGAN2-ada(Hispanic)
-### **Team Project**
+
 ### 목표
 * GAN부터 styleGAN2-ada까지 모델의 목적과 방향성을 학습
 * StyleGAN2-ada을 활용하여 세상에 존재할법한 이미지를 생성
