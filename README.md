@@ -133,7 +133,7 @@ network = '/content/drive/MyDrive/AIB_04_Stylebot/network-snapshot-000200.pkl'
 ## Interpolation
 https://user-images.githubusercontent.com/83389640/177293268-c2fe90d7-08eb-4056-9a16-c29105461c85.mp4
 
-## style Mixing
+## Style Mixing
 * column => 0-3 layer의 특징 + low
 <p align="center"><img src="https://user-images.githubusercontent.com/83389640/144366538-9c5e36bb-cb5f-42e6-aaef-4583ec0952bf.png"></p>
 
